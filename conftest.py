@@ -1,6 +1,6 @@
 import os 
 import re
-from pathlib import path 
+from pathlib import Path 
 
 import pytest 
 from selenium import webdriver
@@ -19,7 +19,7 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture
 def driver(request):
     opts = Options()
-    if os.getenv("HEADLESS", "1") == "1"
+    if os.getenv("HEADLESS", "1") == "1":
         opts.add_argument("_headless")
     opts.add_argument("--width=1920")
     opts.add_argument("--height=1080")
@@ -29,7 +29,7 @@ def driver(request):
 
     rep = getattr(request.node, "rep_call", None)
     if rep is not None and rep.failed:
-        safe = re.sub(r"[^\w-]", "_" request.node.name)
+        safe = re.sub(r"[^\w-]", "_", request.node.name)
         drv.save_screenshot(str(SHOT_DIR / f"{safe}.png"))
 
         drv.quit()
