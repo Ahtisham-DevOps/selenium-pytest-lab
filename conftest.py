@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
 
 SHOT_DIR = Path("screenshot")
 SHOT_DIR.mkdir(exist_ok=True)
@@ -24,7 +25,7 @@ def driver(request):
     opts.add_argument("--width=1920")
     opts.add_argument("--height=1080")
 
-    drv = webdriver.Firefox(options=opts)
+    drv = webdriver.Firefox(options=opts, service=Service(log_output="gecko.log"))
     yield drv
 
     rep = getattr(request.node, "rep_call", None)
