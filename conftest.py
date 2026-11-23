@@ -21,7 +21,7 @@ def pytest_runtest_makereport(item, call):
 def driver(request):
     opts = Options()
     if os.getenv("HEADLESS", "1") == "1":
-        opts.add_argument("_headless")
+        opts.add_argument("--headless")
     opts.add_argument("--width=1920")
     opts.add_argument("--height=1080")
 
